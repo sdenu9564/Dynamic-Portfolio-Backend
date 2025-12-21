@@ -1,0 +1,48 @@
+{
+  "name": "dynamic-portfilio-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Sourav Manna",
+  "license": "MIT",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-winston": "^4.2.0",
+    "helmet": "^8.1.0",
+    "http-status": "^2.1.0",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.1",
+    "node-cache": "^5.1.2",
+    "nodemon": "^3.1.11",
+    "pretty-error": "^4.0.0",
+    "puppeteer": "^24.33.0",
+    "winston": "^3.19.0",
+    "xlsx": "^0.18.5",
+    "yahoo-finance2": "^3.10.2"
+  },
+  "devDependencies": {
+    "@types/compression": "^1.8.1",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/method-override": "^3.0.0",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.10.2",
+    "@types/node-cache": "^4.2.5",
+    "@types/xlsx": "^0.0.36",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
