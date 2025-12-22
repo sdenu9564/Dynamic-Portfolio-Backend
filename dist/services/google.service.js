@@ -5,18 +5,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getGoogleData = void 0;
 const node_cache_1 = __importDefault(require("node-cache"));
-const puppeteer_1 = __importDefault(require("puppeteer"));
+const puppeteer_core_1 = __importDefault(require("puppeteer-core"));
+const chromium_1 = __importDefault(require("@sparticuz/chromium"));
 const cache = new node_cache_1.default({ stdTTL: 300 });
 const getGoogleData = async (symbol, browser) => {
     let localBrowser = null;
     try {
-        if (!symbol.trim())
+        if (!symbol?.trim())
             return { cmp: null, peRatio: null, latestEarnings: null };
         const cached = cache.get(`google_${symbol}`);
         if (cached)
             return cached;
         if (!browser) {
-            localBrowser = await puppeteer_1.default.launch({ headless: true });
+            localBrowser = await puppeteer_core_1.default.launch({
+                args: chromium_1.default.args,
+                executablePath: await chromium_1.default.executablePath(),
+                headless: true,
+            });
             browser = localBrowser;
         }
         const page = await browser.newPage();
@@ -52,8 +57,14 @@ const getGoogleData = async (symbol, browser) => {
         return { cmp: null, peRatio: null, latestEarnings: null };
     }
     finally {
-        if (localBrowser)
-            await localBrowser.close();
+        if (localBrowser) {
+            try {
+                await localBrowser.close();
+            }
+            catch (e) {
+                console.warn("Error closing local browser:", e);
+            }
+        }
     }
 };
 exports.getGoogleData = getGoogleData;

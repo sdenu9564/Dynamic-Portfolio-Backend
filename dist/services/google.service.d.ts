@@ -1,4 +1,4 @@
-import { Browser } from "puppeteer";
+import { Browser } from "puppeteer-core";
 export interface GoogleData {
     peRatio: number | null;
     latestEarnings: number | null;
