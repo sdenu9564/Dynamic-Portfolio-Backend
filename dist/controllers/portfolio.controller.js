@@ -11,7 +11,7 @@ const google_service_1 = require("../services/google.service");
 const sendHttpResponse_1 = require("../utils/sendHttpResponse");
 const googleSymbolMap_1 = require("../utils/googleSymbolMap");
 const getPortfolio = async (req, res) => {
-    let browser = null; // ✅ EXPLICIT TYPE
+    let browser = null;
     try {
         const portfolio = (0, xlsx_service_1.loadExcel)();
         if (!portfolio.length) {
@@ -26,7 +26,7 @@ const getPortfolio = async (req, res) => {
                 .replace(":NSE", ".NS")
                 .replace(":BSE", ".BO");
             const [googleData, yahooCMP] = await Promise.all([
-                (0, google_service_1.getGoogleData)(googleSymbol, browser), // safe here
+                (0, google_service_1.getGoogleData)(googleSymbol, browser),
                 (0, yahoo_service_1.getCMP)(yahooSymbol),
             ]);
             let cmp = googleData.cmp;
@@ -60,7 +60,7 @@ const getPortfolio = async (req, res) => {
     }
     finally {
         if (browser) {
-            await browser.close(); // ✅ SAFE CLOSE
+            await browser.close();
         }
     }
 };

@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getGoogleData = void 0;
-// services/google.service.ts
 const node_cache_1 = __importDefault(require("node-cache"));
 const puppeteer_1 = __importDefault(require("puppeteer"));
 const cache = new node_cache_1.default({ stdTTL: 300 });
@@ -31,18 +30,15 @@ const getGoogleData = async (symbol, browser) => {
                 const n = Number(val.replace(/,/g, "").trim());
                 return isNaN(n) ? null : n;
             };
-            const textContent = document.body.innerText; // grab all visible text
-            // Regex to find P/E ratio
+            const textContent = document.body.innerText;
             let peRatio = null;
             const peMatch = textContent.match(/P\/E\s*ratio\s*([0-9.,]+)/i);
             if (peMatch && peMatch[1])
                 peRatio = safeNumber(peMatch[1]);
-            // Regex to find Earnings per Share (EPS)
             let latestEarnings = null;
             const epsMatch = textContent.match(/Earnings\s*per\s*share\s*([0-9.,]+)/i);
             if (epsMatch && epsMatch[1])
                 latestEarnings = safeNumber(epsMatch[1]);
-            // CMP scraping (keep existing logic)
             const cmpText = document.querySelector('[data-qa="pricedata"] div[jsname]')?.textContent ?? null;
             const cmp = safeNumber(cmpText);
             return { cmp, peRatio, latestEarnings };
