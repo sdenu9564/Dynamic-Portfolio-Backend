@@ -7,5 +7,4 @@ const app = express();
 middlewaresConfig(app);
 app.use('/api', ApiRoutes);
 
-
 export default app;
