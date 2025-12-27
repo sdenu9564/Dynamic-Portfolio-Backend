@@ -36,8 +36,6 @@ export default (app: Application): void => {
 
   app.use(
     cors({
-      credentials: true,
-      exposedHeaders: ['Authorization'],
       origin: (origin, callback) => {
         if (!origin) return callback(null, true);
         if (!allowedDomains.includes(origin)) {
